@@ -18,8 +18,7 @@ def create_usuario():
         nombre=data['nombre'],
         apellido=data['apellido'],
         email=data['email'],
-        celular=data['celular'],
-        fecha_registro=data['fecha_registro']
+        celular=data['celular']
     )
 
     db.session.add(new_usuario)
@@ -50,7 +49,6 @@ def update_usuario(username):
     usuario.apellido = data.get('apellido', usuario.apellido)
     usuario.email = data.get('email', usuario.email)
     usuario.celular = data.get('celular', usuario.celular)
-    usuario.fecha_registro = data.get('fecha_registro', usuario.fecha_registro)
 
     db.session.commit()
     return usuario_schema.dump(usuario), 200
@@ -71,11 +69,11 @@ def login():
     password_hash = data.get("password_hash")
 
     if not all([username, password_hash]):
-        return jsonify({"message": "Todos los campos son requeridos", "status": "error"}), 400
+        return jsonify({"mensaje": "Todos los campos son requeridos", "status": "error"}), 400
 
     usuario = Usuarios.query.filter_by(username=username).first()
     if usuario and Bcrypt().check_password_hash(usuario.password_hash, password_hash):
         access_token = create_access_token(identity={'id_usuario': usuario.id_usuario, 'username': usuario.username})
-        return jsonify({"message": "Login exitoso", "status": 1, "access_token": access_token}), 200
+        return jsonify({"mensaje": "Login exitoso", "status": 1, "access_token": access_token}), 200
     else:
-        return jsonify({"message": "Credenciales incorrectas", "status": 0}), 401
+        return jsonify({"mensaje": "Credenciales incorrectas", "status": 0}), 401

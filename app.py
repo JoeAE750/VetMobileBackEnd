@@ -1,5 +1,6 @@
 from flask import Flask
 from routes.Usuarios_routes import usuarios_bp
+from routes.Mascotas_routes import mascotas_bp
 from config import DATABASE_CONNECTION_URI
 from flask_cors import CORS
 from utils.extensions import bcrypt
@@ -26,6 +27,7 @@ bcrypt.init_app(app)
 jwt.init_app(app)
 
 app.register_blueprint(usuarios_bp)
+app.register_blueprint(mascotas_bp)
 
 if __name__ == '__main__':
   app.run(port=5000)

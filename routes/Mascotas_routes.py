@@ -33,8 +33,8 @@ def get_mascotas():
 # Read mascotas por id del dueño
 @mascotas_bp.route('/mascotas/usuario', methods=['GET'])
 def get_mascotas_usuario():
-    data = request.get_json()
-    mascotas = Mascotas.query.filter_by(id_usuario=data['id_usuario']).first_or_404()
+    id_usuario = request.args.get('id_usuario')
+    mascotas = Mascotas.query.filter_by(id_usuario=id_usuario).all()
     return mascotas_schema.dump(mascotas), 200
 
 # Read mascotas por id del dueño y nombre de mascota

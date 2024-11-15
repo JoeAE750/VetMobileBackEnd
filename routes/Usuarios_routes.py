@@ -62,6 +62,7 @@ def delete_usuario(username):
     return '', 204
 
 #Login
+"""
 @usuarios_bp.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
@@ -75,5 +76,26 @@ def login():
     if usuario and Bcrypt().check_password_hash(usuario.password_hash, password_hash):
         access_token = create_access_token(identity={'id_usuario': usuario.id_usuario, 'username': usuario.username})
         return jsonify({"mensaje": "Login exitoso", "status": 1, "access_token": access_token}), 200
+    else:
+        return jsonify({"mensaje": "Credenciales incorrectas", "status": 0}), 401
+        """
+@usuarios_bp.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    username = data.get("username")
+    password_hash = data.get("password_hash")
+
+    if not all([username, password_hash]):
+        return jsonify({"mensaje": "Todos los campos son requeridos", "status": "error"}), 400
+
+    usuario = Usuarios.query.filter_by(username=username).first()
+    if usuario and Bcrypt().check_password_hash(usuario.password_hash, password_hash):
+        access_token = create_access_token(identity={'id_usuario': usuario.id_usuario, 'username': usuario.username})
+        return jsonify({
+            "mensaje": "Login exitoso",
+            "status": 1,
+            "access_token": access_token,
+            "id_usuario": usuario.id_usuario  # Agrega el id_usuario aquí
+        }), 200
     else:
         return jsonify({"mensaje": "Credenciales incorrectas", "status": 0}), 401

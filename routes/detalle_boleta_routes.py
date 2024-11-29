@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from utils.extensions import db
 from models.DetalleBoleta import DetalleBoleta
-from schemas.DetalleBoleta_schema import detalle_boleta_schema, detalles_boleta_schema
+from schemas.Detalle_boleta_schema import detalle_boleta_schema, detalles_boleta_schema
 
 detalle_boleta_bp = Blueprint("DetalleBoleta", __name__)
 

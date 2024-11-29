@@ -4,7 +4,7 @@ from models.Veterinarios import Veterinarios
 class Veterinario_schema(ma.SQLAlchemySchema):
     class Meta:
         model = Veterinarios
-        fields = ('id_veterinario', 'nombre', 'especializacion')
+        fields = ('id_veterinario', 'nombre', 'especializacion', 'horainicio', 'horafinal')
 
 veterinario_schema = Veterinario_schema()
 veterinarios_schema = Veterinario_schema(many=True)

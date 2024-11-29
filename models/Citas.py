@@ -1,5 +1,6 @@
 from utils.extensions import db
 from sqlalchemy import DateTime
+from models.Estado_cita import Estado_cita 
 
 class Citas(db.Model):
     __tablename__ = "Citas"
@@ -8,9 +9,10 @@ class Citas(db.Model):
     id_veterinario = db.Column(db.Integer, db.ForeignKey('Veterinarios.id_veterinario'),nullable=False)
     fecha_cita = db.Column(DateTime(timezone=False))
     razon = db.Column(db.String(255))
-    id_estado = db.Column(db.Integer, db.ForeignKey('Estado_cita.id_estado'),nullable=False)
     id_servicio = db.Column(db.Integer, db.ForeignKey('Tipo_Servicios.id_servicio'),nullable=False)
     id_usuario = db.Column(db.Integer, db.ForeignKey('Usuarios.id_usuario'), nullable=False)
+    id_estado = db.Column(db.Integer, db.ForeignKey('Estado_cita.id_estado'),nullable=False)
+    estado_cita = db.relationship('Estado_cita', backref='Citas', lazy=True)
 
     def __init__(self,id_mascota,id_veterinario,fecha_cita,razon,id_estado,id_servicio,id_usuario):
         self.id_mascota=id_mascota

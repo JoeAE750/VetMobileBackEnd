@@ -1,5 +1,5 @@
 from utils.extensions import ma
-from models.Estado_Cita import Estado_Cita
+from models.Estado_cita import Estado_Cita
 
 class EstadoCita_schema(ma.SQLAlchemySchema):
     class Meta:

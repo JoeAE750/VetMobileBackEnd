@@ -10,6 +10,7 @@ class Citas(db.Model):
     razon = db.Column(db.String(255))
     id_estado = db.Column(db.Integer, db.ForeignKey('Estado_cita.id_estado'),nullable=False)
     id_servicio = db.Column(db.Integer, db.ForeignKey('Tipo_Servicios.id_servicio'),nullable=False)
+    id_usuario = db.Column(db.Integer, db.ForeignKey('Usuarios.id_usuario'), nullable=False)
 
     def __init__(self,id_cita,id_mascota,id_veterinario,fecha_cita,razon,id_estado,id_servicio):
         self.id_cita=id_cita

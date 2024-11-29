@@ -15,7 +15,8 @@ def create_cita():
         fecha_cita=data['fecha_cita'],
         razon=data['razon'],
         id_estado=data['id_estado'],
-        id_servicio=data['id_servicio']
+        id_servicio=data['id_servicio'],
+        id_usuario=data['id_usuario']
     )
     db.session.add(new_cita)
     db.session.commit()
@@ -32,6 +33,12 @@ def get_citas():
 def get_cita(id_cita):
     cita = Citas.query.get_or_404(id_cita)
     return cita_schema.dump(cita), 200
+
+#Read by ID de Usuario
+@citas_bp.route('/citas/usuario/<int:id_usuario>', methods=['GET'])
+def get_cita_usuario(id_usuario):
+    citas = Citas.query.filter_by(id_usuario=id_usuario).all()
+    return citas_schema.dump(citas)
 
 # Update
 @citas_bp.route('/citas/<int:id_cita>', methods=['PUT'])

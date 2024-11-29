@@ -1,4 +1,5 @@
 from utils.extensions import db
+from sqlalchemy import DateTime
 
 class Usuarios(db.Model):
     __tablename__ = "Usuarios"
@@ -9,6 +10,7 @@ class Usuarios(db.Model):
     apellido = db.Column(db.String(50))
     email = db.Column(db.String(100))
     celular = db.Column(db.String(15))
+    fecha_registro = db.Column(DateTime(timezone=True), nullable=False)
     mascotas = db.relationship('Mascotas', back_populates='usuario', cascade='all, delete-orphan')
 
     def __init__(self, username, password_hash, nombre, apellido, email, celular):

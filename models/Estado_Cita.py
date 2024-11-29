@@ -1,6 +1,6 @@
 from utils.extensions import db
 
-class EstadoCita(db.Model):
+class Estado_Cita(db.Model):
     __tablename__ = "Estado_Cita"
     id_estado = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(20), nullable=False)

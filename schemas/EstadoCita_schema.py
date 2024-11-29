@@ -1,9 +1,9 @@
 from utils.extensions import ma
-from models.EstadoCita import EstadoCita
+from models.Estado_Cita import Estado_Cita
 
 class EstadoCita_schema(ma.SQLAlchemySchema):
     class Meta:
-        model = EstadoCita
+        model = Estado_Cita
         fields = ('id_estado', 'nombre')
 
 estado_cita_schema = EstadoCita_schema()
